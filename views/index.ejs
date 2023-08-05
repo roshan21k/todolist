@@ -1,0 +1,37 @@
+<%- include('./partials/header.ejs') %>
+<main>
+<div class = container>
+    <% if(note.length > 0){ %>
+    <% for(let i=0;i< note.length;i++){ %>
+        <div class="box">
+            <h2>Task <%= i+1 %></h2>
+            <% if(note[i].name.length > 100){ %>
+                <h3 class="notes"> <%= note[i].name.substring(0,100)+'... ' %><a href="/view/<%= note[i].id %>/<%= i+1 %>">Read More</a> %></h3>
+            <% }else{ %>
+                <h3 class="notes"> <%= note[i].name%></h3>
+            <% } %>
+            <form class=" delform" action="/delete" method ="POST" >
+                <button class="delete" name="delete" value="<%= note[i].id %>">🗑️</button>
+            </form>
+
+            
+        </div>
+        
+        <% }%>
+    <% }else{ %>
+         <h1>Add a note</h1> 
+    <% } %>
+
+    
+
+
+</div>
+
+    <form class="form" action="/add" method ="POST">
+        <textarea  id="note" name="note" placeholder="Enter Yout Note here" required ></textarea>
+        <button type="submit" value="submit">Add Note</button>
+    </form>
+
+
+</main>
+<%- include('./partials/footer.ejs') %>
